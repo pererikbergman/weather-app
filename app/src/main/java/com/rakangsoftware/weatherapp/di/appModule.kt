@@ -1,5 +1,6 @@
 package com.rakangsoftware.weatherapp.di
 
+import com.rakangsoftware.weatherapp.BuildConfig
 import com.rakangsoftware.weatherapp.data.remote.repository.WeatherRepositoryApi
 import com.rakangsoftware.weatherapp.domain.weather.repository.WeatherRepository
 import com.rakangsoftware.weatherapp.domain.weather.usecases.CheckMinNumOfChar
@@ -10,7 +11,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val appModule = module {
-    single { provideWeatherApiKey() }
+    single { BuildConfig.WEATHER_API_KEY }
 
     single<WeatherRepository> { WeatherRepositoryApi(apiKey = get()) }
 
@@ -19,8 +20,4 @@ val appModule = module {
 
     factory { WeatherUseCases(getWeather = get(), checkMinNumOfChar = get()) }
     viewModel { WeatherViewModel(useCases = get()) }
-}
-
-fun provideWeatherApiKey(): String {
-    return "put-your-key-here"
 }

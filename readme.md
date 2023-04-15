@@ -20,7 +20,7 @@ For a detailed explanation of the implementation and concepts used in this proje
 
 1. Clone this repository.
 2. Open the project in Android Studio.
-3. Obtain an API key from [OpenWeatherMap](https://openweathermap.org/appid) and add it to `local.properties` file as `weather_api_key=YOUR_API_KEY`.
+3. Obtain an API key from [OpenWeatherMap](https://openweathermap.org/api) and add it to `local.properties` file as `weather_api_key=YOUR_API_KEY`.
 4. Build and run the project on an Android device or emulator.
 
 We hope this project serves as a helpful starting point for implementing Clean Architecture in your own mobile applications. Happy coding!

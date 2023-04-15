@@ -1,0 +1,58 @@
+# Built application files
+*.apk
+*.aar
+*.ap_
+
+# Files for the Dalvik VM
+*.dex
+
+# Java class files
+*.class
+
+# Generated files
+bin/
+gen/
+out/
+build/
+
+# Local configuration files
+local.properties
+
+# Android Studio files
+*.iml
+.idea/
+.gradle/
+captures/
+
+# Native build output
+build/intermediates/cmake
+
+# NDK build output
+obj/
+jniLibs/
+
+# Bazel files
+bazel-*
+
+# IntelliJ IDEA files
+*.ipr
+*.iws
+*.ids
+.idea_modules/
+*.log
+
+# Proguard files
+proguard-*
+
+# Gradle wrapper
+gradle/wrapper/gradle-wrapper.jar
+gradle/wrapper/gradle-wrapper.properties
+
+# Kapt generated files
+kapt-*/
+
+# Android Studio 4.1+ Navigation editor
+.navigation/
+
+# Mac
+.DS_Store

@@ -14,7 +14,7 @@ The app also integrates Koin, a lightweight dependency injection framework for K
 
 ## Blog Post Reference
 
-For a detailed explanation of the implementation and concepts used in this project, please refer to the accompanying blog post: [Clean Architecture for Mobile App Development: Building a Weather App](Blog URL)
+For a detailed explanation of the implementation and concepts used in this project, please refer to the accompanying blog post: [Clean Architecture for Mobile App Development: Building a Weather App](https://medium.com/@pererikbergman/understanding-clean-architecture-5f7a39a965fb)
 
 ## Getting Started
 

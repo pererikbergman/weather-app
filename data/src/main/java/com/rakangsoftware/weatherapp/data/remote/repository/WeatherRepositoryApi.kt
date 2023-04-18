@@ -2,15 +2,15 @@ package com.rakangsoftware.weatherapp.data.remote.repository
 
 import com.rakangsoftware.weatherapp.data.remote.model.CurrentWeatherDto
 import com.rakangsoftware.weatherapp.data.remote.model.toDomainWeather
-import com.rakangsoftware.weatherapp.domain.common.Result
 import com.rakangsoftware.weatherapp.domain.weather.Weather
 import com.rakangsoftware.weatherapp.domain.weather.repository.WeatherRepository
-import io.ktor.client.*
-import io.ktor.client.call.*
-import io.ktor.client.engine.okhttp.*
-import io.ktor.client.plugins.contentnegotiation.*
-import io.ktor.client.request.*
-import io.ktor.serialization.kotlinx.json.*
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.engine.okhttp.OkHttp
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.request.get
+import io.ktor.client.request.parameter
+import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
 class WeatherRepositoryApi(
@@ -26,14 +26,8 @@ class WeatherRepositoryApi(
         }
     }
 
-    override suspend fun getWeather(location: String): Result<Weather> {
-        return try {
-            val weatherData = fetchWeatherData(location)
-            val weather = weatherData.toDomainWeather()
-            Result.Success(weather)
-        } catch (exception: Exception) {
-            Result.Error(exception)
-        }
+    override suspend fun getWeather(location: String): Weather {
+        return fetchWeatherData(location).toDomainWeather()
     }
 
     private suspend fun fetchWeatherData(location: String): CurrentWeatherDto {
@@ -43,6 +37,8 @@ class WeatherRepositoryApi(
                 parameter("key", apiKey)
                 parameter("q", location)
             }
-        }.body()
+        }.body<CurrentWeatherDto>().also {
+            val a = 1
+        }
     }
 }

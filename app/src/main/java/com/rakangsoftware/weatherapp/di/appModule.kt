@@ -3,7 +3,6 @@ package com.rakangsoftware.weatherapp.di
 import com.rakangsoftware.weatherapp.BuildConfig
 import com.rakangsoftware.weatherapp.data.remote.repository.WeatherRepositoryApi
 import com.rakangsoftware.weatherapp.domain.weather.repository.WeatherRepository
-import com.rakangsoftware.weatherapp.domain.weather.usecases.CheckMinNumOfChar
 import com.rakangsoftware.weatherapp.domain.weather.usecases.GetWeather
 import com.rakangsoftware.weatherapp.screen.weather.WeatherUseCases
 import com.rakangsoftware.weatherapp.screen.weather.WeatherViewModel
@@ -16,8 +15,7 @@ val appModule = module {
     single<WeatherRepository> { WeatherRepositoryApi(apiKey = get()) }
 
     factory { GetWeather(weatherRepository = get()) }
-    factory { CheckMinNumOfChar() }
 
-    factory { WeatherUseCases(getWeather = get(), checkMinNumOfChar = get()) }
+    factory { WeatherUseCases(getWeather = get()) }
     viewModel { WeatherViewModel(useCases = get()) }
 }

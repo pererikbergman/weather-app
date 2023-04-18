@@ -15,6 +15,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.rakangsoftware.weatherapp.core.Async
+import com.rakangsoftware.weatherapp.domain.common.AppException
 import com.rakangsoftware.weatherapp.domain.weather.Weather
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -44,24 +46,28 @@ fun WeatherScreen(weatherViewModel: WeatherViewModel) {
             colors = TextFieldDefaults.textFieldColors(
                 textColor = MaterialTheme.colors.onBackground,
 
-            ),
+                ),
             modifier = Modifier
                 .padding(16.dp)
                 .fillMaxWidth()
         )
 
         when (state) {
-            WeatherViewModel.UIState.Init -> {}
-            is WeatherViewModel.UIState.Loading -> {
-                CircularProgressIndicator()
+            null -> {}
+            is Async.Fail -> {
+                val error = ((state as Async.Fail<Weather>).error)
+                val errorMessage = when (error) {
+                    is AppException.SearchTermTooShortException -> "Search term have to be at lease ${error.min} characters long."
+                    else -> "An error occur"
+                }
+                Text(errorMessage)
             }
-            is WeatherViewModel.UIState.Success -> {
-                val weather = (state as WeatherViewModel.UIState.Success).weather
+
+            is Async.Loading -> CircularProgressIndicator()
+
+            is Async.Success -> {
+                val weather = (state as Async.Success<Weather>).data
                 WeatherCard(weather)
-            }
-            is WeatherViewModel.UIState.Error -> {
-                val message = (state as WeatherViewModel.UIState.Error).message
-                Text(message)
             }
         }
     }
